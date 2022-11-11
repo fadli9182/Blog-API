@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import AddPost from "./AddPost";
 import Navigasi from "./Navigasi";
-// import PostList from "./PostList";
 import { getAccessToken } from "./utils/api";
 
 function Home() {
@@ -32,9 +31,6 @@ function Home() {
       <Navigasi />
       <div className="container mt-5">
         <AddPost getdata={getData} post={post} />
-        {/* <div className="row">
-          <PostList key={post.id} post={post} getdata={getData} />
-        </div> */}
       </div>
     </>
   );

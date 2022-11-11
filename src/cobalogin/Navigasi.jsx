@@ -14,25 +14,20 @@ const Navigasi = () => {
   }
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark text-light">
+      <nav className="navbar navbar-expand-lg navbar-dark text-light navi">
         <div className="container">
           <h1 className="navbar-brand" href="/">
             YoiBlog
           </h1>
           <ul className="navbar-nav me-auto mb-2 flex-row gap-2 justify-content-center">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="/">
+              <a className="nav-link active" aria-current="page" href="/" style={{ fontWeight: "700" }}>
                 Home
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/">
-                Link
               </a>
             </li>
           </ul>
           <form className="d-flex gap-4">
-            <Link className="btn btn-primary" to={"/login"}>
+            <Link className="btn btn-primary loginBtn" to={"/login"}>
               Login
             </Link>
             <button className="btn btn-danger" onClick={logout}>

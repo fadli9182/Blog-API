@@ -4,13 +4,14 @@ import axios from "axios";
 import { getAccessToken } from "./utils/api";
 import Swal from "sweetalert2";
 import { FaHeart } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 export const AddPost = ({ post, getdata }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState();
   const [isEdit, setIsEdit] = useState(false);
-  const [edit, setEdit] = useState([]);
+  const [id, setId] = useState("");
 
   const config = {
     headers: { Authorization: `Bearer ${getAccessToken()}`, "Content-Type": "multipart/form-data", Accept: "application/json" },
@@ -29,12 +30,14 @@ export const AddPost = ({ post, getdata }) => {
       headers: { Authorization: `Bearer ${getAccessToken()}`, "Content-Type": "multipart/form-data", Accept: "application/json" },
     };
     if (isEdit === true) {
-      axios.put(`https://jcc.brandingyou.id/api/post/${post.id}`, edit, config).then((res) => {
+      axios.post(`https://jcc.brandingyou.id/api/post/${id}`, formData, config).then((res) => {
         console.log(res);
         setIsEdit(false);
         alert("Berhasil rubah");
         getdata();
       });
+      setContent("");
+      setTitle("");
     } else {
       axios
         .post(`https://jcc.brandingyou.id/api/post`, formData, config)
@@ -53,11 +56,15 @@ export const AddPost = ({ post, getdata }) => {
   };
 
   async function handleEdit(id) {
+    setIsEdit(true);
     await axios.get(`https://jcc.brandingyou.id/api/post/${id}`, config).then((res) => {
-      console.log(res.data.data);
-      setEdit(res.data.data);
+      console.log(res);
+      setTitle(res.data.data.title);
+      setContent(res.data.data.content);
+      setId(id);
+      console.log(id);
       console.log("clicked");
-      setIsEdit(true);
+      console.log(content);
       console.log(isEdit);
     });
   }
@@ -73,7 +80,7 @@ export const AddPost = ({ post, getdata }) => {
   };
 
   if (!post.length) {
-    return <p>No One Notes</p>;
+    return <p>No One Posts</p>;
   }
 
   return (
@@ -97,10 +104,20 @@ export const AddPost = ({ post, getdata }) => {
       </form>
       <div className="row ">
         {post.map((post) => (
-          <div key={post.id} className="card col-xl-12 my-5 p-5 shadow  ">
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ rotate: 360, scale: 1 }}
+            transition={{
+              type: "spring",
+              stiffness: 260,
+              damping: 20,
+            }}
+            key={post.id}
+            className="card col-xl-12 my-5 p-5 shadow  "
+          >
             <div className="row ">
               <div className="col-md-5" style={{ display: "flex", justifyContent: "center" }}>
-                <img className="img-fluid" width={"450px"} height={"400px"} src={post.image} alt="Gambar" />
+                <motion.img whileHover={{ scale: 1.5 }} transition={{ type: "spring", stiffness: 200 }} className="img-fluid" width={"450px"} height={"400px"} src={post.image} alt="Gambar" />
               </div>
               <div className="col-md-7">
                 <h5>
@@ -120,7 +137,7 @@ export const AddPost = ({ post, getdata }) => {
                 </button>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </>
