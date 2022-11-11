@@ -33,7 +33,7 @@ export const AddPost = ({ post, getdata }) => {
       axios.post(`https://jcc.brandingyou.id/api/post/${id}`, formData, config).then((res) => {
         console.log(res);
         setIsEdit(false);
-        alert("Berhasil rubah");
+        Swal.fire("Berhasil", "Postingan berhasil diubah", "success");
         getdata();
       });
       setContent("");
@@ -87,12 +87,16 @@ export const AddPost = ({ post, getdata }) => {
     <>
       <form onSubmit={onAddPostHandler}>
         <div className="form-floating mb-3">
-          <input value={title} onChange={(e) => setTitle(e.target.value)} type="text" className="form-control" name="title" id="titlePost" placeholder="Masukan Judul" />
-          <label htmlFor="formId1">Judul</label>
+          <input value={title} onChange={(e) => setTitle(e.target.value)} type="text" className="form-control" name="title" id="titlePost" placeholder="Masukan Judul" style={{ height: "70px" }} />
+          <label className="form-label" htmlFor="formId1">
+            Masukan Judul
+          </label>
         </div>
         <div className="form-floating mb-3">
-          <input value={content} onChange={(e) => setContent(e.target.value)} type="textarea" height={"100px"} className="form-control" name="title" id="contentPost" placeholder="Masukan Judul" />
-          <label htmlFor="formId1">Masukan Isi Post</label>
+          <input value={content} onChange={(e) => setContent(e.target.value)} type="textarea" height={"100px"} className="form-control" name="title" id="contentPost" placeholder="Masukan Isi Post" style={{ height: "70px" }} />
+          <label className="form-label" htmlFor="formId1">
+            Masukan Isi Post
+          </label>
         </div>
         <div className="mb-3">
           <label htmlFor="" className="form-label">
@@ -100,7 +104,7 @@ export const AddPost = ({ post, getdata }) => {
           </label>
           <input file={image} accept=".jpg, .png, .jpeg" onChange={(e) => setImage(e.target.files[0])} type="file" className="form-control" name="gambar" id="imagePost" />
         </div>
-        <button className="btn btn-success">Post</button>
+        <button className="btn btn-success w-100">Post</button>
       </form>
       <div className="row ">
         {post.map((post) => (
