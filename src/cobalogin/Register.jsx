@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Navigasi from "./Navigasi";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { register } from "./utils/api";
 import Swal from "sweetalert2";
+import { FaArrowLeft } from "react-icons/fa";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -30,8 +30,10 @@ const Register = () => {
 
   return (
     <>
-      <Navigasi />
       <div className="container mt-5 w-50">
+        <Link to={"/login"} style={{ textDecoration: "none", color: "white" }}>
+          <FaArrowLeft /> Kembali ke halaman Login
+        </Link>
         <form onSubmit={onRegisterHandler}>
           <div class="mb-3">
             <label for="" class="form-label">

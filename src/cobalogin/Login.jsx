@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Navigasi from "./Navigasi";
 import { login } from "../cobalogin/utils/api";
 import Swal from "sweetalert2";
 
@@ -37,7 +36,6 @@ function Login() {
 
   return (
     <>
-      <Navigasi />
       <div className="container mt-5 w-50">
         <form onSubmit={(e) => onLogin(e)}>
           <div className="mb-3">
